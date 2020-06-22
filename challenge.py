@@ -1,9 +1,7 @@
 def make_division_by(n):
-    """This closure returns a function that returns the division
-       of an x number by n 
-    """
-    # You have to code here!
-    pass
+    def division(number):
+        return number /  n
+    return division
 
 
 def run():
@@ -19,10 +17,19 @@ def run():
 
 if __name__ == '__main__':
     import unittest
-
     class ClosureSuite(unittest.TestCase):
+        def setUp(self):
+            self.functions = {
+                6 : [18,3],
+                20: [100,5],
+                3: [54,18],
+            }
+        
         def test_closure_make_division_by(self):
-            # Make the closure test here
-            pass
+            for key,value in self.functions.items():
+                division = make_division_by(value[1])
+                self.assertEqual(key, division(value[0]))
 
-    run()
+        def tearDown(self):
+            del(self.functions)
+    unittest.main()
